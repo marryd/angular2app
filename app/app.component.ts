@@ -6,16 +6,16 @@ import {Person} from './person';
     'my-app',
     template:`
     <h1>{{title}}</h1>
-    <h2>{{person.Name}} details!</h2>
-    <div><label>id: </label>{{person.Id}}</div>
+    <h2>{{person.name}} details!</h2>
+    <div><label>id: </label>{{person.id}}</div>
     <div>
       <label>name: </label>
-      <input [(ngModel)]='person.Name' placeholder='Name' />
+      <input [(ngModel)]='person.name' placeholder='name' />
     </div>
-    <div><label>age: </label>{{person.Age}}</div>
+    <div><label>age: </label>{{person.age}}</div>
     `
 })
 export class AppComponent {
   title = 'Mackan knackar angular 2';
-  person : Person = {Id : 1, Name : 'Markus', Age : 39};
+  person : Person = {id : 1, name : 'Markus', age : 39};
 }
