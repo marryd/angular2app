@@ -1,17 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "outDir": "dist/app",
+    "target": "ES5",
     "module": "system",
-    "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "moduleResolution": "node",
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "exclude": [
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
-  ]
+  "filesGlob": [
+    "app/**/*.ts",
+    "tests/**/*.ts",
+    "typings/browser.d.ts"
+  ],
+  "files": [
+    "app/app.component.ts",
+    "app/main.ts",
+    "app/person.ts",
+    "app/services/mock-persons.ts",
+    "app/services/person-service.ts",
+    "tests/person.spec.ts",
+    "typings/browser.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }
