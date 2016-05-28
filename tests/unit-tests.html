@@ -1,11 +1,12 @@
 <body>
   <!-- #1. add the system.js library -->
   <script src="../node_modules/systemjs/dist/system-polyfills.js"></script>
-  <script src="../node_modules/systemjs/dist/system.src.js"></script>
+  <script src="../dist/lib/system.src.js"></script>
 
   <script src="../node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
   <script src="../node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
   <script src="../node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+  <script src="../systemjs.config.js"></script>
 
   <link rel="stylesheet" href="../node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
 
@@ -14,12 +15,9 @@
     //     for imports from the app folder
     System.config({
       map: {
-        'tests': "../dist/app/tests"
+        tests: "../dist/tests"
       },
-      "defaultJSExtensions": true,
-      packages: {
-        'app': {defaultExtension: 'js'}
-      }
+      "defaultJSExtensions": true
     });
 
     // #3. Import the spec file explicitly

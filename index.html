@@ -3,7 +3,8 @@
     <base href="/">
     <title>Mackans Angular2-app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/styles.css">
 
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order
@@ -17,21 +18,11 @@
     <script src="dist/lib/angular2.dev.js"></script>
     <script src="dist/lib/router.dev.js"></script>
     <script src="dist/lib/http.dev.js"></script>
+    <script src="systemjs.config.js"></script>
 
     <!-- 2. Configure SystemJS -->
     <script>
-      System.config({
-        map: {
-        'app': "dist/app/app"
-      },
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/main')
+      System.import('app')
             .then(null, console.error.bind(console));
     </script>
   </head>

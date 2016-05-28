@@ -9,21 +9,21 @@ import {Http, Response} from 'angular2/http';
 import {Person} from '../person';
 
 @Injectable()
-export class PersonService{
-  constructor(private http: Http){
+export class PersonService {
+    constructor(private http: Http) {
 
-  }
-  getPersons() : Observable<Person[]>{
+    }
+    getPersons(): Observable<Person[]> {
 
-    return this.http.get('app/services/persons.json')
-                    .map((response : Response) => {
-                      if(response.ok === false)
-                        throw new Error('Felkod: ' + response.status);
+        return this.http.get('app/services/persons.json')
+            .map((response: Response) => {
+                if (response.ok === false)
+                    throw new Error('Felkod: ' + response.status);
 
-                      let res = response.json();
-                      return res.data;
-                    })
-                    .catch(err=>Observable.throw('fel fel fel: ' + err.text()));
+                let res = response.json();
+                return res.data;
+            })
+            .catch(err => Observable.throw('fel fel fel: ' + err.text()));
 
-  }
+    }
 }
