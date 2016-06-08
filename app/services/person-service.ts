@@ -16,6 +16,7 @@ export class PersonService {
     getPersons(): Observable<Person[]> {
 
         return this.http.get('app/services/persons.json')
+            .delay(3000)
             .map((response: Response) => {
                 if (response.ok === false)
                     throw new Error('Felkod: ' + response.status);

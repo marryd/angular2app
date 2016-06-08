@@ -1,13 +1,14 @@
-import {Component} from 'angular2/core';
+import {Component, ViewChild} from 'angular2/core';
 import {Person} from './person';
 import {PersonService} from './services/person-service';
 import {TopNavbar} from './top-navbar.component';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
     selector: 'my-app',
     directives: [TopNavbar],
     template: `
-    <top-navbar></top-navbar>
+    <top-navbar *ngIf="moreThanSixPersons"></top-navbar>
     <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
@@ -34,6 +35,7 @@ import {TopNavbar} from './top-navbar.component';
         <h1>{{title}}</h1>
         <div *ngFor="let person1 of persons" >{{person1.name}}</div>
         <h2>{{person.name}} details!</h2>
+        <input type="button" value="toggle top menu" (click)="toggleTopMenu()" />
         <div><label>id: </label>{{person.id}}</div>
         <div>
           <label>name: </label>
@@ -51,6 +53,7 @@ export class AppComponent {
     persons: Person[];
     title = 'Mackan knackar angular 2';
     person: Person = <Person>{ id: 1, name: 'Markus', age: 39 };
+    moreThanSixPersons: boolean = true;
 
     constructor(private personService: PersonService) {
 
@@ -58,8 +61,16 @@ export class AppComponent {
 
     ngOnInit() {
         this.personService.getPersons().subscribe(
-            persons => { this.persons = persons },
+            persons => {
+                this.persons = persons;
+                this.moreThanSixPersons = this.persons.length > 6;
+            },
             error => console.log(error)
         );
+
+    }
+
+    toggleTopMenu() {
+      this.moreThanSixPersons = !this.moreThanSixPersons;
     }
 }

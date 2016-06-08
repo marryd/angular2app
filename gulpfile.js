@@ -7,17 +7,17 @@ const tsconfig = require('tsconfig-glob');
 
 // clean the contents of the distribution directory
 gulp.task('clean', function () {
-  return del('dist');
+  return del(['dist']);
 });
 
 // copy static assets - i.e. non TypeScript compiled source
-gulp.task('copy:assets', function() {
+gulp.task('copy:assets', ['clean'], function() {
   return gulp.src(['app/**/*', 'styles.css', '!app/**/*.ts'], { base : './' })
     .pipe(gulp.dest('dist'))
 });
 
 // copy dependencies
-gulp.task('copy:libs', function() {
+gulp.task('copy:libs', ['clean'], function() {
   return gulp.src([
       'node_modules/angular2/bundles/angular2-polyfills.js',
       'node_modules/systemjs/dist/system.src.js',
@@ -26,17 +26,16 @@ gulp.task('copy:libs', function() {
       'node_modules/angular2/bundles/router.dev.js',
       'node_modules/angular2/bundles/http.dev.js'
     ])
-    .pipe(gulp.dest('dist/lib/'))
+    .pipe(gulp.dest('dist/lib'))
 });
 
 
 // TypeScript compile
 gulp.task('compile', ['clean'], function () {
-  return gulp
-    .src(tscConfig.files)
+  return gulp.src(tscConfig.files, { base : './' })
     .pipe(sourcemaps.init())
     .pipe(typescript(tscConfig.compilerOptions))
-    .pipe(sourcemaps.write('.'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist'));
 });
 
