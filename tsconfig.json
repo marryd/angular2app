@@ -18,7 +18,9 @@
   ],
   "files": [
     "app/app.component.ts",
+    "app/left-navigation.ts",
     "app/main.ts",
+    "app/person-component.ts",
     "app/person.ts",
     "app/services/mock-persons.ts",
     "app/services/person-service.ts",

@@ -2,75 +2,34 @@ import {Component, ViewChild} from 'angular2/core';
 import {Person} from './person';
 import {PersonService} from './services/person-service';
 import {TopNavbar} from './top-navbar.component';
+import {LeftNavigation} from './left-navigation';
+import {PersonOverview} from './person-component';
 import {Observable} from 'rxjs/Rx';
 
 @Component({
     selector: 'my-app',
-    directives: [TopNavbar],
+    directives: [TopNavbar, LeftNavigation, PersonOverview],
     template: `
-    <top-navbar *ngIf="moreThanSixPersons"></top-navbar>
+    <top-navbar *ngIf="showTopNavbar"></top-navbar>
     <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
-          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Reports</a></li>
-          <li><a href="#">Analytics</a></li>
-          <li><a href="#">Export</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="">Nav item</a></li>
-          <li><a href="">Nav item again</a></li>
-          <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li>
-          <li><a href="">More navigation</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="">Nav item again</a></li>
-          <li><a href="">One more nav</a></li>
-          <li><a href="">Another nav item</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1>{{title}}</h1>
-        <div *ngFor="let person1 of persons" >{{person1.name}}</div>
-        <h2>{{person.name}} details!</h2>
-        <input type="button" value="toggle top menu" (click)="toggleTopMenu()" />
-        <div><label>id: </label>{{person.id}}</div>
-        <div>
-          <label>name: </label>
-          <input [(ngModel)]='person.name' placeholder='name' />
+        <div class="row">
+          <navigation></navigation>
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <person-overview (moreThanSixPersonsChange)="onMoreThanSixPersonsChange($event)"></person-overview>
+          </div>
         </div>
-        <div><label>age: </label>{{person.age}}</div>
-        </div>
-      </div>
     </div>
   `
-    ,
-    providers: [PersonService]
 })
 export class AppComponent {
-    persons: Person[];
-    title = 'Mackan knackar angular 2';
-    person: Person = <Person>{ id: 1, name: 'Markus', age: 39 };
-    moreThanSixPersons: boolean = true;
+    showTopNavbar: boolean = true;
 
-    constructor(private personService: PersonService) {
+    constructor() {
 
     }
 
-    ngOnInit() {
-        this.personService.getPersons().subscribe(
-            persons => {
-                this.persons = persons;
-                this.moreThanSixPersons = this.persons.length > 6;
-            },
-            error => console.log(error)
-        );
-
+    onMoreThanSixPersonsChange(e : any) {
+      this.showTopNavbar = e.value;
     }
 
-    toggleTopMenu() {
-      this.moreThanSixPersons = !this.moreThanSixPersons;
-    }
 }
