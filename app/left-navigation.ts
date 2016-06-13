@@ -1,13 +1,16 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
+import { RouterLink } from '@angular/router-deprecated';
 
 @Component({
-  selector: 'navigation',
-  template: `
+    selector: 'navigation',
+    directives: [RouterLink],
+    styles: [".router-link-active { background-color: red; }"],
+    template: `
   <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
-      <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-      <li><a href="#">Reports</a></li>
-      <li><a href="#">Analytics</a></li>
+      <!--<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>-->
+      <li><a [routerLink]="['Person-overview']">Start</a></li>
+      <li><a [routerLink]="['Another']">En annan sida</a></li>
       <li><a href="#">Export</a></li>
     </ul>
     <ul class="nav nav-sidebar">
@@ -26,6 +29,8 @@ import {Component} from 'angular2/core';
   `
 })
 
-export class LeftNavigation{
+export class LeftNavigation {
+    constructor() {
 
+    }
 }

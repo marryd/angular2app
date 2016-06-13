@@ -1,6 +1,7 @@
-import {Component, Output, EventEmitter} from 'angular2/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {Person} from './person';
 import {PersonService} from './services/person-service';
+import {SharedService} from './services/shared-service';
 
 @Component({
     selector: 'person-overview',
@@ -16,18 +17,16 @@ import {PersonService} from './services/person-service';
   </div>
   <div><label>age: </label>{{person.age}}</div>
   `,
-    providers: [PersonService],
-    outputs: ['moreThanSixPersonsChange']
+    providers: [PersonService]
 })
 
 export class PersonOverview {
     persons: Person[];
     title = 'Mackan knackar angular 2';
     person: Person = <Person>{ id: 1, name: 'Markus', age: 39 };
-    moreThanSixPersons: boolean = true;
-    public moreThanSixPersonsChange = new EventEmitter();
+    
 
-    constructor(private personService: PersonService) {
+    constructor(private personService: PersonService, private sharedService: SharedService) {
 
     }
 
@@ -35,16 +34,12 @@ export class PersonOverview {
         this.personService.getPersons().subscribe(
             persons => {
                 this.persons = persons;
-                this.moreThanSixPersons = this.persons.length > 6;
             },
             error => console.log(error)
         );
     }
 
     toggleTopMenu() {
-        this.moreThanSixPersons = !this.moreThanSixPersons;
-        this.moreThanSixPersonsChange.emit({
-          value : this.moreThanSixPersons
-        });
+        this.sharedService.showTopNavbar = !this.sharedService.showTopNavbar;
     }
 }

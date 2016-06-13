@@ -19,13 +19,15 @@ gulp.task('copy:assets', ['clean'], function() {
 // copy dependencies
 gulp.task('copy:libs', ['clean'], function() {
   return gulp.src([
-      'node_modules/angular2/bundles/angular2-polyfills.js',
-      'node_modules/systemjs/dist/system.src.js',
-      'node_modules/rxjs/bundles/Rx.js',
-      'node_modules/angular2/bundles/angular2.dev.js',
-      'node_modules/angular2/bundles/router.dev.js',
-      'node_modules/angular2/bundles/http.dev.js'
-    ])
+    "./node_modules/systemjs/dist/system.src.js",
+    "./node_modules/es6-shim/es6-shim.min.js",
+    "./node_modules/zone.js/dist/zone.js",
+    "./node_modules/reflect-metadata/Reflect.js",
+    "./node_modules/rxjs/**/*.js",
+    "./node_modules/angular2-in-memory-web-api/**/*.js",
+    "./node_modules/@angular/**/*.js",
+    "./node_modules/crypto-js/crypto-js.js"
+    ], { base: './node_modules/' })
     .pipe(gulp.dest('dist/lib'))
 });
 

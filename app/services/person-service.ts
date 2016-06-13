@@ -1,10 +1,7 @@
 import {Observable} from 'rxjs/Rx';
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import {PERSONS} from './mock-persons';
-import {Http, Response} from 'angular2/http';
-//import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/catch';
-//import 'rxjs/add/operator/toPromise';
+import {Http, Response} from '@angular/http';
 
 import {Person} from '../person';
 
