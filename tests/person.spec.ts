@@ -1,4 +1,5 @@
 import { Person } from '../app/person';
+
 describe('Person', () => {
   it('has name', () => {
     let person: Person = <Person>{id: 1, name: 'Super Cat', age: 23};

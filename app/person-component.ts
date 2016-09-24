@@ -16,15 +16,14 @@ import {SharedService} from './services/shared-service';
     <input [(ngModel)]='person.name' placeholder='name' />
   </div>
   <div><label>age: </label>{{person.age}}</div>
-  `,
-    providers: [PersonService]
+  `
 })
 
 export class PersonOverview {
     persons: Person[];
     title = 'Mackan knackar angular 2';
     person: Person = <Person>{ id: 1, name: 'Markus', age: 39 };
-    
+
 
     constructor(private personService: PersonService, private sharedService: SharedService) {
 

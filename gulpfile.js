@@ -17,7 +17,7 @@ gulp.task('copy:assets', ['clean'], function() {
 });
 
 // copy dependencies
-gulp.task('copy:libs', ['clean'], function() {
+gulp.task('copy:libs', function() {
   return gulp.src([
     "./node_modules/systemjs/dist/system.src.js",
     "./node_modules/es6-shim/es6-shim.min.js",
@@ -25,15 +25,14 @@ gulp.task('copy:libs', ['clean'], function() {
     "./node_modules/reflect-metadata/Reflect.js",
     "./node_modules/rxjs/**/*.js",
     "./node_modules/angular2-in-memory-web-api/**/*.js",
-    "./node_modules/@angular/**/*.js",
-    "./node_modules/crypto-js/crypto-js.js"
+    "./node_modules/@angular/**/*.js"
     ], { base: './node_modules/' })
     .pipe(gulp.dest('dist/lib'))
 });
 
 
 // TypeScript compile
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', function () {
   return gulp.src(tscConfig.files, { base : './' })
     .pipe(sourcemaps.init())
     .pipe(typescript(tscConfig.compilerOptions))
@@ -49,5 +48,5 @@ gulp.task('tsconfig-glob', function () {
   });
 });
 
-gulp.task('build', ['compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', ['clean', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('default', ['build']);
